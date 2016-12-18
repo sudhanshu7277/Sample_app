@@ -1,0 +1,242 @@
+.sidebar a>i{
+  font-size: 20px;
+    float: right;
+    line-height: 20px;
+}
+
+
+/* Added for Modal Window */
+.center-modal {
+    top:auto;
+    margin-top: 12%;
+    margin-left:10%; 
+    
+} 
+
+/* Hide for mobile, show later */
+.sidebar {
+  display: none;
+}
+.active a{
+  color: #fff !important;
+}
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: #f5f5f5;
+    border-right: 1px solid #eee;
+  }
+}
+
+#alternate
+{
+  text-align: right;
+}
+@media (max-width: 1000px) {
+    #alternate
+    {
+      text-align: left;
+    }
+}
+
+
+ul .li-color i{
+font-size:25px; 
+margin-left:-20px;
+}
+
+ul .li-font i{
+  font-size:15px;
+}
+
+/* Sidebar navigation */
+.nav-sidebar {
+  margin-right: -21px; /* 20px padding + 1px border */
+  margin-bottom: 20px;
+  margin-left: -20px;
+}
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+  color: #fff;
+  background-color: #053E74;
+}
+
+
+#hero-titleudf
+{
+  margin: 0px;
+}
+
+@media (max-width: 700px) {
+    #hero-titleudf {
+      display: none;
+    }
+}
+.drop-down .dropdown-menu{
+  width: 100%;
+  position: relative;
+
+}
+.drop-down .dropdown-menu li a{
+    box-shadow: none;
+    border-bottom: 0px;
+    color: #0D74AF;
+}
+.group{
+  list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+.group li{
+      line-height: 20px;
+    height: 20px;
+}
+
+.selected {
+            background-color: #eee;
+            color: black;
+            /*font-weight:bold;*/
+        }
+        
+        .table>tbody>tr>td,
+        .table>tbody>tr>th,
+        .table>tfoot>tr>td,
+        .table>tfoot>tr>th,
+        .table>thead>tr>td,
+        .table>thead>tr>th {
+            padding: 0px;
+            line-height: 1.42857143;
+            text-align: center;
+            vertical-align: text-top;
+        }
+
+        .right-inner-addon {
+    position: relative;
+}
+.right-inner-addon input {
+    padding-left: 30px;    
+}
+
+.right-inner-addon i {
+    position: absolute;
+    left: 25px;
+    padding: 10px 0px;
+    pointer-events: none;
+    z-index: 100;
+}
+
+
+/*    --------------------------------------------------
+  :: Login Section
+  -------------------------------------------------- */
+#login {
+    padding-top: 50px
+}
+#login .form-wrap {
+    width: 30%;
+    margin: 0 auto;
+}
+#login h1 {
+    color: #1fa67b;
+    font-size: 18px;
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 20px;
+}
+#login .form-group {
+    margin-bottom: 25px;
+}
+#login .checkbox {
+    margin-bottom: 20px;
+    position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+#login .checkbox.show:before {
+    content: '\e013';
+    color: #1fa67b;
+    font-size: 17px;
+    margin: 1px 0 0 3px;
+    position: absolute;
+    pointer-events: none;
+    font-family: 'Glyphicons Halflings';
+}
+#login .checkbox .character-checkbox {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    vertical-align: middle;
+    display: inline-block;
+}
+#login .checkbox .label {
+    color: #6d6d6d;
+    font-size: 13px;
+    font-weight: normal;
+}
+#login .btn.btn-custom {
+    font-size: 14px;
+  margin-bottom: 20px;
+}
+#login .forget {
+    font-size: 13px;
+  text-align: center;
+  display: block;
+}
+
+/*    --------------------------------------------------
+  :: Inputs & Buttons
+  -------------------------------------------------- */
+.form-control {
+    color: #212121;
+}
+.btn-custom {
+    color: #fff;
+  background-color: #1fa67b;
+}
+.btn-custom:hover,
+.btn-custom:focus {
+    color: #fff;
+}
+
+footer.footer_alignment{
+  text-align:center;
+  position:relative;
+   left:0px;
+   bottom:0px;
+   height:30px;
+   width:100%;
+}
+
+/*    --------------------------------------------------
+    :: Footer
+  -------------------------------------------------- 
+#footer {
+    color: #6d6d6d;
+    font-size: 12px;
+    text-align: center;
+}
+#footer p {
+    margin-bottom: 0;
+}
+#footer a {
+    color: inherit;
+}
+
+*/

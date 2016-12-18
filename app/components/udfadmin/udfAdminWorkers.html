@@ -1,0 +1,126 @@
+<div class="container-fluid" ng-controller="AdminWorkerCtrl">
+    <div style="background-color: #eee;">
+        <div class="oneui-animation ng-scope">
+            <div class="row">
+                <div class="col-md-10">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-3">
+                        <button class="btn btn-success" ng-class="currentState" data-ng-click="addOnClick('addWorker');"><span>ADD WORKER</span><i style="margin-left:10px; margin-right:1px; font-size:25px;" class="fa fa-pied-piper-alt"></i><i class="fa fa-plus"></i></button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-danger" ng-class="currentState" data-ng-click="addOnClick('removeWorker');"><span>REMOVE WORKER</span><i style="margin-left:10px; margin-right:1px; font-size:25px;" class="fa fa-pied-piper-alt"></i><i class="fa fa-minus"></i></button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-info" ng-class="currentState" data-ng-click="addOnClick('editWorker');"><span>EDIT WORKER INFO</span><i style="margin-left:10px; font-size:18px;" class="fa fa-pencil"></i></button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-warning" ng-class="currentState" data-ng-click="addOnClick('activeWorkers');"><span >VIEW ACTIVE WORKERS</span><i style="margin-left:10px; font-size:18px;" class="fa fa-lightbulb-o"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    &nbsp;
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive" data-ng-if="!crudUrl.clicked">
+        <table class="table table-bordered">
+            <!--table-hover table-striped st-table="rowCollection" -->
+            <thead>
+                <tr>
+                    <th>
+                        <a href="" ng-click="orderByField='user_id'; reverseSort = !reverseSort">
+                            Worker ID<span ng-show="orderByField == 'user_id'"><span ng-show="!reverseSort" class="glyphicon glyphicon-arrow-up">&nbsp;</span><span ng-show="reverseSort" class="glyphicon glyphicon-arrow-down">&nbsp;</span></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="" ng-click="orderByField='user_name'; reverseSort = !reverseSort">
+                            Worker Name<span ng-show="orderByField == 'user_name'"><span ng-show="!reverseSort" class="glyphicon glyphicon-arrow-up">&nbsp;</span><span ng-show="reverseSort" class="glyphicon glyphicon-arrow-down">&nbsp;</span></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="" ng-click="orderByField='dept_id'; reverseSort = !reverseSort">
+                            Department ID<span ng-show="orderByField == 'dept_id'"><span ng-show="!reverseSort" class="glyphicon glyphicon-arrow-up">&nbsp;</span><span ng-show="reverseSort" class="glyphicon glyphicon-arrow-down">&nbsp;</span></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="" ng-click="orderByField='created_on'; reverseSort = !reverseSort">
+                            Created On<span ng-show="orderByField == 'created_on'"><span ng-show="!reverseSort" class="glyphicon glyphicon-arrow-up">&nbsp;</span><span ng-show="reverseSort" class="glyphicon glyphicon-arrow-down">&nbsp;</span></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="" ng-click="orderByField='created_by'; reverseSort = !reverseSort">
+                            Created By<span ng-show="orderByField == 'created_by'"><span ng-show="!reverseSort" class="glyphicon glyphicon-arrow-up">&nbsp;</span><span ng-show="reverseSort" class="glyphicon glyphicon-arrow-down">&nbsp;</span></span>
+                        </a>
+                    </th>
+                    <!--<th>
+                        <a href="" ng-click="orderByField='Queue'; reverseSort = !reverseSort">
+                            Status<span ng-show="orderByField == 'Queue'"><span ng-show="!reverseSort" class="glyphicon glyphicon-arrow-up">&nbsp;</span><span ng-show="reverseSort" class="glyphicon glyphicon-arrow-down">&nbsp;</span></span>
+                        </a>
+                    </th>-->
+                    <th>
+                        <a href="" ng-click="orderByField='deactivated_on'; reverseSort = !reverseSort">
+                            Deactivated On<span ng-show="orderByField == 'deactivated_on'"><span ng-show="!reverseSort" class="glyphicon glyphicon-arrow-up">&nbsp;</span><span ng-show="reverseSort" class="glyphicon glyphicon-arrow-down">&nbsp;</span></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="" ng-click="orderByField='deactivated_by'; reverseSort = !reverseSort">
+                            Deactivated By<span ng-show="orderByField == 'deactivated_by'"><span ng-show="!reverseSort" class="glyphicon glyphicon-arrow-up">&nbsp;</span><span ng-show="reverseSort" class="glyphicon glyphicon-arrow-down">&nbsp;</span></span>
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat-start="workerInfo in (udfvalues = (udfAdminWorker[currentPage] |orderBy:orderByField:reverseSort))" ng-model="adminWorkerRecords" ng-class="{'selected':workerInfo.isChecked}">
+                    <td>{{workerInfo.user_id}}</td>
+                    <td>{{workerInfo.user_name}}</td>
+                    <td>{{workerInfo.dept_id}}</td>
+                    <td>{{workerInfo.created_on | date:'MM/dd/yyyy'}}</td>
+                    <td>{{workerInfo.created_by}}</td>
+                    <td>{{workerInfo.deactivated_on}}</td>
+                    <td>{{workerInfo.deactivated_by}}</td>
+                </tr>
+                <tr ng-repeat-end>
+                    <td colspan="10" ng-show="workerInfo.showdtl">
+                        Details of row :{{$index}}
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+            <tr><td colspan="12">
+                <div class="text-center">
+                    <ul class="pagination">
+                        <li ng-class="{disabled: currentPage == 0}">
+                            <a href="javascript:;" ng-click="prevPage()"><< Prev</a>
+                        </li>
+                        <li ng-repeat="range1 in range(udfAdminWorker.length)" ng-class="{active: range1 == currentPage}" ng-click="setPage()">
+                            <a href="javascript:;" ng-bind="range1 + 1">1</a>
+                        </li>
+                        <li ng-class="{disabled: currentPage == udfAdminWorker.length - 1}">
+                            <a href="javascript:;" ng-click="nextPage()">Next >></a>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+<div data-ng-if="crudUrl.clicked" ng-include="crudUrl.url"></div>
+</div>

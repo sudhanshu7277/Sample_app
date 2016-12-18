@@ -1,0 +1,211 @@
+<div ng-controller="udfsearchCltr" style="border:.5px solid #ccc">
+    <header style="width:100%">
+        <div class="row">
+            <div class="col-md-3" style="margin-left:20px">
+                Search:
+                <input ng-model="mySearch" type="text" class="form-control" size="30" placeholder="Type anything here...">
+            </div>
+            <div class="col-md-3">
+                Departments:
+                <select class="form-control col-md-4" ng-model="filtered.dept_name" ng-options="item.dept_name for item in depts" ng-init="item.dept_name=0">
+                    <option value="">All</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                Manager ID:
+                <input id="disabledInput" type="text" disabled class="form-control col-md-2" ng-model="manID" style="background:#555; border:1px solid #ccc;color:white">
+            </div>
+            <div class="col-md-2" style="margin-top:20px">
+                <a href="#/"><i class="glyphicon glyphicon-th-list"></i></a>
+                <a href="#/udfsearchGrid"><i class="glyphicon glyphicon-th"></i></a>
+            </div>
+        </div>
+    </header>
+    <header style="width:100%;height:10%;border-top:1px solid white">
+        <div class="row">
+            <div class="col-md-3">
+            {{filterResults.length}} found</div>
+        </div>
+    </header>
+    <div ng-repeat="form in udfFormsnDetails  | filter:mySearch as filterResults" class="row" style="border:1px solid #ccc;width:100%;margin:5px 0px" ng-if="$index % 3 == 0">
+        <div class="row">
+            <div class="panel panel-primary col-md-3 " style="margin:5px 30px;border:0px">
+                <div data-toggle="modal" data-target="#myModal" ata-toggle="tooltip" ng-click="value=form.formID" title="{{udfFormsnDetails[$index].form_desc}}" class="panel-heading accordion-toggle btn btn-success box" style="border:1px;width:300px;font-size:small">{{udfFormsnDetails[$index].form_name}}
+                    <div style="float:right" class="btn" data-target="#{{$index}}" ng-mouseenter="showDiv1 = true" ng-mouseleave="showDiv1 = false"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></div>
+                </div>
+                <div ng-show="showDiv1" class="panel-body" style="border:.5px solid #ccc;width:300px;font-size:x-small;" id="{{$index}}">
+                    {{udfFormsnDetails[$index].form_desc}}
+                </div>
+            </div>
+            <div class="panel panel-primary col-md-3" style="margin:5px 30px;border:0px" ng-if="udfFormsnDetails.length > ($index + 1)">
+                <div data-toggle="collapse" data-target="#myModal" class=" panel-heading accordion-toggle btn btn-success box" style="border:1px;width:300px;font-size:small" title="">{{udfFormsnDetails[$index+1].form_name}}
+                    <div style="float:right" class="btn" data-target="#{{$index+1}}" ng-mouseenter="showDiv2 = true" ng-mouseleave="showDiv2 = false"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></div>
+                </div>
+                <div ng-show="showDiv2" class="panel-body" style="border:.5px solid #ccc;width:300px;font-size:x-small;" id="{{$index+1}}">
+                    {{udfFormsnDetails[$index+1].form_desc}}
+                </div>
+            </div>
+            <div class="panel panel-primary col-md-3 " style="margin:5px 30px;border:0px" ng-if="udfFormsnDetails.length > ($index + 2)">
+                <div data-toggle="collapse" data-target="#myModal" class=" panel-heading accordion-toggle btn btn-success box" style="border:1px;width:300px;font-size:small">{{udfFormsnDetails[$index+2].form_name}}
+                    <div style="float:right" class="btn" data-target="#{{$index+2}}" ng-mouseenter="showDiv3 = true" ng-mouseleave="showDiv3 = false"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></div>
+                </div>
+                <div ng-show="showDiv3" class="panel-body" style="border:.5px solid #ccc;width:300px;font-size:x-small;" id="{{$index+2}}">
+                    {{udfFormsnDetails[$index+2].form_desc}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Model div -->
+    <div class="modal fade bd-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">{{formTitle}}</h4>
+                    <div class="row">
+                        <div class="col-md-4 ">Account no:&nbsp;{{accountNo}}</div>
+                        <div class="col-sm-2 ">Site ID:&nbsp;{{siteId}}</div>
+                        <div class="col-sm-4 ">Department :&nbsp;{{department}}</div>
+                    </div>
+                </div>
+                <div class="modal-body" style="width:70%;height:100%;margin-left:150px">
+                    <div ng-repeat="udfField in gridPageModel">
+                        <span ng-switch on="udfField.udf_fn_get_dynamic_page_json.datatype_desc">
+                            
+                            <div class="row">
+                                <div class="col-md-6 Alignleft">
+                                    <label> {{udfField.udf_fn_get_dynamic_page_json.field_desc}}
+                                    </label>
+                                </div>
+                                <div class="col-md-6" style="text-align:center;margin-top:10px">
+                                    <span ng-switch-when="Textbox">
+                                        <input  class="form-control"
+                                        type="text" size='2'/>
+                                    </span>
+                                    <span ng-switch-when="Phone Number">
+                                        <input  class="form-control"
+                                        type="text" size='2'/>
+                                    </span>
+                                    <span ng-switch-when="Label">
+                                        <label>{{udfField.udf_fn_get_dynamic_page_json.field_value}}</label>
+                                    </span>
+                                    <span ng-switch-when="Checkbox">
+                                        <div class="form-gropu">
+                                            <input type="checkbox" id="{{udfField.udf_fn_get_dynamic_page_json.field_desc}}" value=""></input>
+                                            <label for="{{udfField.udf_fn_get_dynamic_page_json.field_desc}}">
+                                                <span></span>{{udfField.udf_fn_get_dynamic_page_json.field_value}}
+                                            </label>
+                                        </div>
+                                    </span>
+                                    <span ng-switch-when="Date">
+                                        <input type="date" id="exampleInput" name="input" ng-model="example.value"
+                                        placeholder="yyyy-MM-dd" required />
+                                    </span>
+                                    <span ng-switch-when="Option Button">
+                                        
+                                        <select class="form-control">
+                                            <option value="">Select</option>
+                                            <option ng-repeat="x in udfField.udf_fn_get_dynamic_page_json.choicedata">{{x.choice_text}}</option>
+                                        </select>
+                                    </span>
+                                    <span ng-switch-when="Dropdown">
+                                        <select class="form-control">
+                                            <option value="">Select</option>
+                                            <option
+                                            ng-repeat="x in udfField.udf_fn_get_dynamic_page_json.choicedata">{{x.choice_text}}</option>
+                                        </select>
+                                    </span>
+                                </div>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Model Div end -->
+    <footer id="udfSearchFooter">
+        <button type="button" class="btn btn-primary" style="width:300px;margin-right:19px" ng-click="loadMore()" ng-class="morePageDisabledClass()">Load more</button>
+    </footer>
+</div>
+<style>
+/* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+
+.row.content {
+height: 1500px
+}
+/* Set gray background color and 100% height */
+
+.sidenav {
+background-color: #f1f1f1;
+height: 100%;
+}
+/* Set black background color, white text and some padding */
+
+footer#udfSearchFooter {
+background-color: #555;
+color: white;
+height: 70px;
+text-align: center;
+}
+
+header {
+background-color: #555;
+color: white;
+padding: 15px;
+height: 100px;
+}
+
+.modal-header {
+background-color: #555;
+color: white;
+padding: 15px;
+}
+
+.modal-footer {
+background-color: #555;
+color: white;
+padding: 15px;
+}
+
+.close {
+color: white;
+}
+/* On small screens, set height to 'auto' for sidenav and grid */
+
+@media screen and (max-width: 767px) {
+.sidenav {
+height: auto;
+padding: 15px;
+}
+.row.content {
+height: auto;
+}
+}
+
+.box:hover {
+-moz-box-shadow: 1 1 10px #ccc;
+-webkit-box-shadow: 1 1 10px #ccc;
+box-shadow: 0 0 10px #053E74;
+}
+
+a:visited {
+color: Black;
+}
+/* mouse over link */
+
+a:hover {
+color: blue;
+}
+/* selected link */
+
+a:active {
+color: white;
+}
+</style>

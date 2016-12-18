@@ -1,0 +1,104 @@
+<div class="container-fluid" ng-controller="AdminWorkerCtrl">
+    <div style="background-color: #rrr;">
+        <div class="oneui-animation ng-scope">
+            <div class="row">
+                <div class="col-md-12">
+                    &nbsp;
+                </div>
+            </div>
+            <div class ="row">
+                <div class="col-md-12">
+                    <div style="background-color: #fff; color: #rrr;">
+                        <!--div style="color: #fff;"-->
+                        <!--button type="button" class="close" ng-click="cancel()">&times;</button-->
+                        
+                    <header class="panel-warning"><h4 class="panel-heading text-center">ACTIVE WORKER</h4></header>
+                    
+                </div>
+            </div>
+        </div>
+        <div class ="row">
+            <form class="form-horizontal" style="width: 80%">
+                <div  class="form-group">
+                    <label class="col-sm-4 control-label" for="fname"><h4>User ID</h4></label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="fname" placeholder="Worker Name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="lname"><h4>User Name</h4></label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="lname" placeholder="User Name">
+                    </div>
+                    <div class="col-sm-1"></div>
+                </div>
+                <div class="col-sm-12" style="width: 100%; margin-left:170px;">
+                        <header class="panel-info">
+                            <h3 class="text-center">WORKERS</h3>
+                        </header>
+                    </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="add"></label>
+                    <div class="col-sm-8" style="height: 235px; overflow: auto;">
+                        <table class="table table-bordered" >
+                            <!--table-hover table-striped st-table="rowCollection" -->
+                            <thead>
+                                <tr>
+                                    <th>
+                                            <input id="selectAll" type="checkbox" ng-model="allItemsSelected" ng-change="selectAll(adminWorkerRecords, allItemsSelected)">
+                                            <label for="selectAll"><h4>SelectAll</h4></label>
+                                        </th>
+                                    <th>
+                                        <label><h4>Workers</h4></label>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <tr ng-repeat-start="workerInfo in adminWorkerRecords" ng-class="{'selected':workerInfo.isChecked}">
+                                        <td style="height:10px">
+                                            <input id={{$index}} type="checkbox" ng-model="workerInfo.isChecked" ng-checked="workerInfo.isChecked">
+                                            <label for={{$index}}><span></span></label>
+                                        </td>
+                                        <td style="height:10px">{{workerInfo.user_name}}</td>
+                                        
+                                    </tr>
+                                    <tr ng-repeat-end>
+                                        <td colspan="10" ng-show="workerInfo.showdtl">
+                                            Details of row :{{$index}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            
+                        </table>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4">
+                    <button class="btn btn-info" ng-class="currentState" ng-click="saveRole()"><span>Save</span><i style="margin-left:12px;"class="glyphicon glyphicon-ok"></i></button>
+                </div>
+                <div class="col-md-4">
+                    <button class="btn btn-warning" ng-class="currentState" ng-click="cancel()"><span>Cancel</span><i style="margin-left:12px;"class="glyphicon glyphicon-remove"></i></button>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-12">
+            </div>
+        </div>
+    </div>
+</div>

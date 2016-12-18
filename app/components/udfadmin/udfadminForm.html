@@ -1,0 +1,124 @@
+<div class="container-fluid" ng-controller="addFormCtrl">
+    <div style="background-color: #eee;">
+        <div class="oneui-animation ng-scope">
+            <div class="row">
+                <div class="col-md-10">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-3">
+                        <button class="btn btn-success" ng-class="currentState" ng-click="addOnClick('addForm');"><span>ADD FORM</span><i style="margin-left:10px; margin-right:3px; font-size:25px;" class="fa fa-newspaper-o"></i><i class="fa fa-plus"></i></button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-danger" ng-class="currentState" ng-click="addOnClick('removeForm');"><span>REMOVE FORM</span><i style="margin-left:10px; margin-right:3px; font-size:25px;" class="fa fa-newspaper-o"></i><i class="fa fa-minus"></i></button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-info" ng-class="currentState" ng-click="addOnClick('showForms');"><span>EDIT FORM INFO</span><i style="margin-left:10px; font-size:18px;" class="fa fa-pencil"></i></button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-warning" ng-class="currentState" ng-click="addOnClick('printForm');"><span >VIEW ACTIVE FORMS</span><i style="margin-left:10px; font-size:18px;" class="fa fa-lightbulb-o"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    &nbsp;
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <!--table-hover table-striped st-table="rowCollection" -->
+            <thead>
+                <tr>
+                    <th>
+                        <input id="selectAll" type="checkbox" ng-model="allItemsSelected" ng-change="selectAll()">
+                        <label for="selectAll"></label>
+                    </th>
+                    <th>
+                        <a href="" ng-click="orderByField='udf_id'; reverseSort = !reverseSort">
+                            Form Name<span ng-show="orderByField == 'udf_id'"><span ng-show="!reverseSort" class="glyphicon glyphicon-arrow-up">&nbsp;</span><span ng-show="reverseSort" class="glyphicon glyphicon-arrow-down">&nbsp;</span></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="" ng-click="orderByField='user_id'; reverseSort = !reverseSort">
+                            Description<span ng-show="orderByField == 'user_id'"><span ng-show="!reverseSort" class="glyphicon glyphicon-arrow-up">&nbsp;</span><span ng-show="reverseSort" class="glyphicon glyphicon-arrow-down">&nbsp;</span></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="" ng-click="orderByField='Manager'; reverseSort = !reverseSort">
+                            Created By<span ng-show="orderByField == 'Manager'"><span ng-show="!reverseSort" class="glyphicon glyphicon-arrow-up">&nbsp;</span><span ng-show="reverseSort" class="glyphicon glyphicon-arrow-down">&nbsp;</span></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="" ng-click="orderByField='Date'; reverseSort = !reverseSort">
+                            Created Date<span ng-show="orderByField == 'Date'"><span ng-show="!reverseSort" class="glyphicon glyphicon-arrow-up">&nbsp;</span><span ng-show="reverseSort" class="glyphicon glyphicon-arrow-down">&nbsp;</span></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="" ng-click="orderByField='Queue'; reverseSort = !reverseSort">
+                            Status<span ng-show="orderByField == 'Queue'"><span ng-show="!reverseSort" class="glyphicon glyphicon-arrow-up">&nbsp;</span><span ng-show="reverseSort" class="glyphicon glyphicon-arrow-down">&nbsp;</span></span>
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat-start="udf in (udfvalues = (udfqueue[currentPage] | filter:mySearch | filter:{dept_name:filtered.dept_name||undefined} | orderBy:orderByField:reverseSort))" ng-model="udfrecords" ng-class="{'selected':udf.isChecked}">
+                    <td>
+                        <input id={{$index}} type="checkbox" ng-model="udf.isChecked">
+                        <label for={{$index}}><span></span></label>
+                    </td>
+                    <td>{{udf.udf_id}}</td>
+                    <td>{{udf.user_id}}</td>
+                    <td>{{udf.Manager}}</td>
+                    <td>{{udf.Date | date:'MM/dd/yyyy'}}</td>
+                    <td>{{udf.Queue}}</td>
+                    <td>{{udf.account_number}}</td>
+                    <td>{{udf.form_number}}</td>
+                    <td>{{udf.dept_name}}</td>
+                    <td>
+                        <!--                            <a href="#udfDymForm">UDF Queue</a>-->
+                        <button ng-click="openRerouteFrm($index)" class="btn btn-info"><span style="margin-right:5px;">Detail</span><i class="glyphicon glyphicon-arrow-down"></i></button>
+                    </td>
+                </tr>
+                <tr ng-repeat-end>
+                    <td colspan="10" ng-show="udf.showdtl">
+                        Details of row :{{$index}}
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+            <tr><td colspan="12">
+                <div class="text-center">
+                    <ul class="pagination">
+                        <li ng-class="{disabled: currentPage == 0}">
+                            <a href="javascript:;" ng-click="prevPage()"><< Prev</a>
+                        </li>
+                        <li ng-repeat="range1 in range(udfvalues.length)" ng-class="{active: range1 == currentPage}" ng-click="setPage()">
+                            <a href="javascript:;" ng-bind="range1 + 1">1</a>
+                        </li>
+                        <li ng-class="{disabled: currentPage == udfqueue.length - 1}">
+                            <a href="javascript:;" ng-click="nextPage()">Next >></a>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        </tfoot
+    </table>
+</div>
+<div data-ng-if="crudUrl.clicked" ng-include="crudUrl.url"></div>
+</div>

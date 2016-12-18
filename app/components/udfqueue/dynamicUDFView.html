@@ -1,0 +1,93 @@
+<form>
+    <div class="row">
+        <div class="container" ng-controller="dynamicUDFformsController">
+
+            <div class="headDiv">
+                <div class="row">
+                    <div class="col-md-2 Alignleft">Account no:</div>
+                    <div class="col-md-4 Alignleft">{{accountNo}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2 Alignleft">Site ID:</div>
+                    <div class="col-md-4 Alignleft">{{siteId}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2 Alignleft">Department :</div>
+                    <div class="col-md-4 Alignleft">{{department}}</div>
+                </div>
+            </div>
+            <div style="width:70%;height:100%;border:solid 1px #555">
+                <div ng-repeat="udfField in udfFields" style="width:70%;height:100%">
+                    <span ng-switch on="udfField.udf_fn_get_dynamic_page_json.datatype_desc">
+                 <div class="row" style="margin-left:1px">
+                                <div class="col-md-6 Alignleft">
+                                    <label> {{udfField.udf_fn_get_dynamic_page_json.field_desc}}
+                                    </label>
+                                </div>
+                                <div class="col-md-6" style="text-align:center;margin-top:10px;margin-bottom:10px">
+                                        <span ng-switch-when="Textbox">  
+            <input  class="form-control"
+              ng-model="udfField.udf_fn_get_dynamic_final_json.field_value"  
+              type="text" size='2'/>  
+            </span>
+
+                    <span ng-switch-when="Phone Number">  
+            <input  class="form-control"
+              ng-model="udfField.udf_fn_get_dynamic_page_json.field_value"  
+              type="text" size='2'/>  
+            </span>
+
+                    <span ng-switch-when="Label">  
+         <label>{{udfField.udf_fn_get_dynamic_page_json.field_value}}</label>
+            </span>
+
+                    <span ng-switch-when="Checkbox"> 
+                            <div class="form-gropu">
+                                <input type="checkbox" id="{{udfField.udf_fn_get_dynamic_page_json.field_desc}}" value=""></input>
+                            <label for="{{udfField.udf_fn_get_dynamic_page_json.field_desc}}">
+                            <span></span>{{udfField.udf_fn_get_dynamic_page_json.field_value}}
+                    </label>
+                </div>
+                </span>
+
+
+                <span ng-switch-when="Date">
+
+                <input type="date" id="exampleInput" name="input" ng-model="example.value"
+       placeholder="yyyy-MM-dd" required />
+                </span>
+
+
+                <span ng-switch-when="Option Button">
+                                     
+                                <select class="form-control"> 
+<option ng-repeat="x in udfField.udf_fn_get_dynamic_page_json.choicedata">{{x.choice_text}}</option>
+</select>
+                    </span>
+
+
+                <span ng-switch-when="Dropdown">
+                                <select class="form-control"> 
+                                <option 
+                ng-repeat="x in udfField.udf_fn_get_dynamic_page_json.choicedata">{{x.choice_text}}</option>
+                                </select>
+                                        </span>
+            </div>
+        </div>
+
+        </span>
+    </div>
+    </div>
+    </div>
+    </div>
+</form>
+
+<style>
+    .headDiv {
+        background-color: #555;
+        color: white;
+        padding: 15px;
+        height: 100px;
+        width: 70%;
+    }
+</style>

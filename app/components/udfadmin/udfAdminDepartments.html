@@ -1,0 +1,133 @@
+<div class="container-fluid" ng-controller="AdminDeptCtrl">
+    <div style="background-color: #eee;">
+        <div class="oneui-animation ng-scope">
+            <div class="row">
+                <div class="col-md-12">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-3">
+                        <button class="btn btn-success" ng-class="currentState" data-ng-click="addOnClick('addDepartment');"><span>ADD DEPARTMENT</span><i style="margin-left:10px; margin-right:2px; font-size:18px;" class="fa fa-sitemap"></i><i class="fa fa-plus"></i></button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-danger" ng-class="currentState" data-ng-click="addOnClick('removeDepartment');"><span>REMOVE DEPARTMENT</span><i style="margin-left:10px; margin-right:2px; font-size:18px;" class="fa fa-sitemap"></i><i class="fa fa-minus"></i></button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-info" ng-class="currentState" data-ng-click="addOnClick('editDepartment');"><span>EDIT DEPARTMENT INFO</span><i style="margin-left:10px; font-size:18px;" class="fa fa-pencil"></i></button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-warning" ng-class="currentState" data-ng-click="addOnClick('activeDepartments');"><span >VIEW ACTIVE DEPARTMENTS</span><i style="margin-left:10px; font-size:18px;" class="fa fa-lightbulb-o"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    &nbsp;
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive" data-ng-if="!crudUrl.clicked">
+        <table class="table table-bordered">
+            <!--table-hover table-striped st-table="rowCollection" -->
+            <thead>
+                <tr>
+                    <!--<th> <th>
+                        <input id="selectAll" type="checkbox" ng-model="allItemsSelected" ng-change="selectAll()">
+                        <label for="selectAll"></label>
+                    </th>-->
+                    <th>
+                        <a href="" ng-click="orderByField='dept_id'; reverseSort = !reverseSort">Department ID<span ng-show="orderByField == 'dept_id'"><span ng-show="!reverseSort" class="glyphicon glyphicon-arrow-up">&nbsp;</span><span ng-show="reverseSort" class="glyphicon glyphicon-arrow-down">&nbsp;</span></span>
+                    </a>
+                </th>
+                <th>
+                    <a href="" ng-click="orderByField='dept_name'; reverseSort = !reverseSort">
+                        Department Name<span ng-show="orderByField == 'dept_name'"><span ng-show="!reverseSort" class="glyphicon glyphicon-arrow-up">&nbsp;</span><span ng-show="reverseSort" class="glyphicon glyphicon-arrow-down">&nbsp;</span></span>
+                    </a>
+                </th>
+                <th>
+                    <a href="" ng-click="orderByField='dept_desc'; reverseSort = !reverseSort">
+                        Description<span ng-show="orderByField == 'dept_desc'"><span ng-show="!reverseSort" class="glyphicon glyphicon-arrow-up">&nbsp;</span><span ng-show="reverseSort" class="glyphicon glyphicon-arrow-down">&nbsp;</span></span>
+                    </a>
+                </th>
+                <th>
+                    <a href="" ng-click="orderByField='created_by'; reverseSort = !reverseSort">
+                        Created On<span ng-show="orderByField == 'created_by'"><span ng-show="!reverseSort" class="glyphicon glyphicon-arrow-up">&nbsp;</span><span ng-show="reverseSort" class="glyphicon glyphicon-arrow-down">&nbsp;</span></span>
+                    </a>
+                </th>
+                <th>
+                    <a href="" ng-click="orderByField='created_by'; reverseSort = !reverseSort">
+                        Created By<span ng-show="orderByField == 'created_by'"><span ng-show="!reverseSort" class="glyphicon glyphicon-arrow-up">&nbsp;</span><span ng-show="reverseSort" class="glyphicon glyphicon-arrow-down">&nbsp;</span></span>
+                    </a>
+                </th>
+                <!--<th>
+                    <a href="" ng-click="orderByField='deactivated_on'; reverseSort = !reverseSort">
+                        Deactivated On<span ng-show="orderByField == 'deactivated_on'"><span ng-show="!reverseSort" class="glyphicon glyphicon-arrow-up">&nbsp;</span><span ng-show="reverseSort" class="glyphicon glyphicon-arrow-down">&nbsp;</span></span>
+                    </a>
+                </th>
+                <th>
+                    <a href="" ng-click="orderByField='deactivated_by'; reverseSort = !reverseSort">
+                        Deactivated By<span ng-show="orderByField == 'deactivated_by'"><span ng-show="!reverseSort" class="glyphicon glyphicon-arrow-up">&nbsp;</span><span ng-show="reverseSort" class="glyphicon glyphicon-arrow-down">&nbsp;</span></span>
+                    </a>
+                </th>-->
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr ng-repeat-start="deptInfo in adminDeptRecords" ng-class="{'selected':deptInfo.isChecked}">
+                <!--<td>
+                    <input id={{$index}} type="checkbox" ng-model="deptInfo.isChecked">
+                    <label for={{$index}}><span></span></label>
+                </td>-->
+                <td>{{deptInfo.dept_id}}</td>
+                <td>{{deptInfo.dept_name}}</td>
+                <td>{{deptInfo.dept_desc}}</td>
+                <td>{{deptInfo.created_on | date:'MM/dd/yyyy'}}</td>
+                <td>{{deptInfo.created_by}}</td>
+                <!--<td>{{deptInfo.deactivated_on}}</td>
+                <td>{{deptInfo.deactivated_by}}</td>-->
+                <!-- <td>
+                    <a href="#udfDymForm">UDF Queue</a>
+                    <button ng-click="openRerouteFrm($index)" class="btn btn-info"><span style="margin-right:5px;">Detail</span><i class="glyphicon glyphicon-arrow-down"></i></button>
+                </td>-->
+            </tr>
+            <tr ng-repeat-end>
+                <td colspan="10" ng-show="deptInfo.showdtl">
+                    Details of row :{{$index}}
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+        <tr><td colspan="12">
+            <div class="text-center">
+                <ul class="pagination">
+                    <li ng-class="{disabled: currentPage == 0}">
+                        <a href="javascript:;" ng-click="prevPage()"><< Prev</a>
+                    </li>
+                    <li ng-repeat="range1 in range(adminDeptRecords.length)" ng-class="{active: range1 == currentPage}" ng-click="setPage()">
+                        <a href="javascript:;" ng-bind="range1 + 1">1</a>
+                    </li>
+                    <li ng-class="{disabled: currentPage == adminDeptRecords.length - 1}">
+                        <a href="javascript:;" ng-click="nextPage()">Next >></a>
+                    </li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+    </tfoot>
+</table>
+</div>
+<div data-ng-if="crudUrl.clicked" ng-include="crudUrl.url"></div>
+</div>

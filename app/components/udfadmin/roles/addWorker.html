@@ -1,0 +1,152 @@
+<div class="container-fluid" ng-controller="addWorkerCtrl">
+    <div style="background-color: #rrr;">
+        <div class="oneui-animation ng-scope">
+            <div class="row">
+                <div class="col-md-12">
+                    &nbsp;
+                </div>
+            </div>
+            <div class ="row">
+                <div class="col-md-12">
+                    <div style="background-color: #fff; color: #rrr;">
+                        <!--div style="color: #fff;"-->
+                        <!--button type="button" class="close" ng-click="cancel()">&times;</button-->
+                        
+                    <header class="panel-success"><h4 class="panel-heading text-center">ADD WORKER</h4></header>
+                    
+                </div>
+            </div>
+        </div>
+        <div class ="row" class="col-md-12">
+            <form class="form-horizontal" style="width: 100%; height:100%;">
+                
+                <div style="width: 100%;">
+                    
+                    <div  class="form-group">
+                        <label class="col-sm-3 control-label" for="fname"><h4>User ID</h4></label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="fname" placeholder="User ID">
+                        </div>
+                        <div class="col-sm-1"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="lname"><h4>User Name</h4></label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="lname" placeholder="user name">
+                        </div>
+                        <div class="col-sm-1"></div>
+                    </div>
+                    <div class="col-sm-12" style="width: 100%; margin-left:170px;">
+                        <header class="panel-info">
+                            <h3 class="text-center">DEPARTMENTS</h3>
+                        </header>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="add"></label>
+                        <div class="col-sm-8" style="height: 235px; overflow: auto;">
+                            <table class="table table-bordered">
+                                <!--table-hover table-striped st-table="rowCollection" -->
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <input id="selectAll" type="checkbox" ng-model="allItemsSelected" ng-change="selectAll(depts, allItemsSelected)">
+                                            <label for="selectAll"><h4>SelectAll</h4></label>
+                                        </th>
+                                        <th>
+                                            <label><h4>departments</h4></label>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat-start="deptInfo in depts" ng-class="{'selected':deptInfo.isChecked}">
+                                        <td style="height:10px">
+                                            <input id={{$index}} type="checkbox" ng-model="deptInfo.isChecked" ng-checked="deptInfo.isChecked">
+                                            <label for={{$index}}><span></span></label>
+                                        </td>
+                                        <td style="height:10px">{{deptInfo.dept_name}}</td>
+                                        
+                                    </tr>
+                                    <tr ng-repeat-end>
+                                        <td colspan="10" ng-show="deptInfo.showdtl">
+                                            Details of row :{{$index}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                
+                            </table>
+                        </div>
+                        <div class="col-sm-1"></div>
+                    </div>
+                </div>
+                <div class="col-sm-12" style="width: 100%; margin-left:170px;">
+                        <header class="panel-info">
+                            <h3 class="text-center">ROLES</h3>
+                        </header>
+                    </div>
+                <div style="width: 100%">
+                    
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="add"></label>
+                        <div class="col-sm-8" style="height: 235px; overflow: auto;">
+                            <table class="table table-bordered">
+                                <!--table-hover table-striped st-table="rowCollection" -->
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <input id="selectAll2" type="checkbox" ng-model="allQueuesSelected" ng-change="selectAll(adminRoleRecords, allQueuesSelected)">
+                                            <label for="selectAll2"><h4>SelectAll</h4></label>
+                                        </th>
+                                        <th>
+                                            <label><h4>roles</h4></label>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat-start="roleInfo in adminRoleRecords" ng-class="{'selected':roleInfo.isChecked}">
+                                        <td style="height:10px">
+                                            <input id={{$index}} type="checkbox" ng-model="roleInfo.isChecked" ng-checked="roleInfo.isChecked">
+                                            <label for={{$index}}><span></span></label>
+                                        </td>
+                                        <td style="height:10px">{{roleInfo.role_name}}</td>
+                                    </tr>
+                                    <tr ng-repeat-end>
+                                        <td colspan="10" ng-show="roleInfo.showdtl">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                
+                            </table>
+                        </div>
+                        <div class="col-sm-1"></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4">
+                    <button class="btn btn-lg btn-info" ng-class="currentState" ng-click="saveRole()"><span>Save</span><i style="margin-left:12px;"class="glyphicon glyphicon-ok"></i></button>
+                </div>
+                <div class="col-md-4">
+                    <button class="btn btn-lg btn-warning" ng-class="currentState" ng-click="cancel()"><span>Cancel</span><i style="margin-left:12px;"class="glyphicon glyphicon-remove"></i></button>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-12">
+            </div>
+        </div>
+    </div>
+</div>

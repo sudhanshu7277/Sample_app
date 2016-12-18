@@ -1,0 +1,112 @@
+<div class="container-fluid" ng-controller="AdminRolesCtrl">
+    <div style="background-color: #eee;">
+        <div class="oneui-animation ng-scope">
+            <div class="row">
+                <div class="col-md-10">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-3">
+                        <button class="btn btn-success crud" ng-class="currentState" data-ng-click="addOnClick('addRole');"><span>ADD ROLE</span><i style="margin-left:10px; margin-right:2px; font-size:18px;" class="fa fa-user-plus"></i></button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-danger crud" ng-class="currentState" data-ng-click="addOnClick('removeRole');"><span>REMOVE ROLE</span><i style="margin-left:10px; margin-right:2px; font-size:18px;" class="fa fa-user-times"></i></button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-info crud" ng-class="currentState" data-ng-click="addOnClick('editRole');"><span>EDIT ROLE INFO</span><i style="margin-left:10px;margin-right:2px; font-size:18px;" class="fa fa-pencil"></i></button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-warning crud" ng-class="currentState" data-ng-click="addOnClick('activeRole');"><span >VIEW ACTIVE ROLES</span><i style="margin-left:10px; margin-right:2px; font-size:18px;" class="fa fa-lightbulb-o"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    &nbsp;
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive" data-ng-if="!crudUrl.clicked">
+        <table class="table table-bordered">
+            <!--table-hover table-striped st-table="rowCollection" -->
+            <!--Change the select menu to a drop down menu from the scroll menu  -->
+            <!--Disable the save button until all the 3 input sections have been filled-->
+            <thead>
+                <tr>
+                    <th>
+                        <a href="" ng-click="orderByField='role_id'; reverseSort = !reverseSort">
+                            Role ID<span ng-show="orderByField == 'role_id'"><span ng-show="!reverseSort" class="glyphicon glyphicon-arrow-up">&nbsp;</span><span ng-show="reverseSort" class="glyphicon glyphicon-arrow-down">&nbsp;</span></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="" ng-click="orderByField='role_name'; reverseSort = !reverseSort">
+                            Description<span ng-show="orderByField == 'role_name'"><span ng-show="!reverseSort" class="glyphicon glyphicon-arrow-up">&nbsp;</span><span ng-show="reverseSort" class="glyphicon glyphicon-arrow-down">&nbsp;</span></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="" ng-click="orderByField='role_desc'; reverseSort = !reverseSort">
+                            Created By<span ng-show="orderByField == 'role_desc'"><span ng-show="!reverseSort" class="glyphicon glyphicon-arrow-up">&nbsp;</span><span ng-show="reverseSort" class="glyphicon glyphicon-arrow-down">&nbsp;</span></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="" ng-click="orderByField='created_on'; reverseSort = !reverseSort">
+                            Created On<span ng-show="orderByField == 'created_on'"><span ng-show="!reverseSort" class="glyphicon glyphicon-arrow-up">&nbsp;</span><span ng-show="reverseSort" class="glyphicon glyphicon-arrow-down">&nbsp;</span></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="" ng-click="orderByField='created_by'; reverseSort = !reverseSort">
+                            Status<span ng-show="orderByField == 'created_by'"><span ng-show="!reverseSort" class="glyphicon glyphicon-arrow-up">&nbsp;</span><span ng-show="reverseSort" class="glyphicon glyphicon-arrow-down">&nbsp;</span></span>
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat-start="rolesInfo in (udfvalues = (udfAdminRole[currentPage] | filter:mySearch | filter:{role_name:filtered.role_name||undefined} | orderBy:role_id:reverseSort))">
+                    <td>{{rolesInfo.role_id}}</td>
+                    <td>{{rolesInfo.role_name}}</td>
+                    <td>{{rolesInfo.role_desc}}</td>
+                    <td>{{rolesInfo.created_on | date:'MM/dd/yyyy'}}</td>
+                    <td>{{rolesInfo.created_by}}</td>
+                </tr>
+                <tr ng-repeat-end>
+                    <td colspan="10" ng-show="rolesInfo.showdtl">
+                        Details of row :{{$index}}
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+            <tr><td colspan="12">
+                <div class="text-center">
+                    <ul class="pagination">
+                        <li ng-class="{disabled: currentPage == 0}">
+                            <a href="javascript:;" ng-click="prevPage()"><< Prev</a>
+                        </li>
+                        <li ng-repeat="range1 in range(udfAdminRole.length)" ng-class="{active: range1 == currentPage}" ng-click="setPage()">
+                            <a href="javascript:;" ng-bind="range1 + 1">1</a>
+                        </li>
+                        <li ng-class="{disabled: currentPage == udfAdminRole.length - 1}">
+                            <a href="javascript:;" ng-click="nextPage()">Next >></a>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+<div data-ng-if="crudUrl.clicked" ng-include="crudUrl.url"></div>
+</div>
+</div>

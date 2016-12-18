@@ -1,0 +1,38 @@
+<form>
+    <div class="row">
+        <div class="container">
+
+            <!-- Modal content-->
+
+            <script type="text/ng-template" id="/components/udfqueue/reroutemodal/udfroute.html">
+                <div ng-controller="AppCtrl">
+                    <div class="modal-header">
+                        <button type="button" class="close" ng-click="cancel()">&times;</button>
+
+                        <header class="panel-primary">
+                            <h3 class="modal-title panel-heading text-center">Reroute UDF</h3></header>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="sel1">Please Select a Queue:</label>
+                            <select class="form-control" ng-model="queue_name" ng-options="item.queue_name as item.queue_name for item in queues" ng-init="item.queue_name=0">
+                                <option value="">Select Queue</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="comment">Comments:</label>
+                            <textarea class="form-control" rows="5" id="comment"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-info" type="button" ng-click="save()">Save<i style="margin-left:12px;" class="glyphicon glyphicon-ok"></i></button>
+                        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel<i style="margin-left:12px;" class="glyphicon glyphicon-remove"></i></button>
+                    </div>
+                </div>
+            </script>
+
+        </div>
+    </div>
+</form>
